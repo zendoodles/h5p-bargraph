@@ -1,0 +1,58 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "343bc20a4c7a3ac3fdeb1119f63c590a",
+    "content-hash": "328c78c93535208251aae0256ec75293",
+    "packages": [
+        {
+            "name": "mbostock/d3",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mbostock/d3.git",
+                "reference": "45a20644c194a06081517b1d705018955bfa43d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mbostock/d3/zipball/45a20644c194a06081517b1d705018955bfa43d5",
+                "reference": "45a20644c194a06081517b1d705018955bfa43d5",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Mike Bostock",
+                    "homepage": "http://bost.ocks.org/mike"
+                }
+            ],
+            "description": "A JavaScript visualization library for HTML and SVG.",
+            "homepage": "http://d3js.org/",
+            "keywords": [
+                "W3C",
+                "animation",
+                "canvas",
+                "dom",
+                "svg",
+                "visualization"
+            ],
+            "time": "2015-11-10 16:34:18"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "mbostock/d3": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

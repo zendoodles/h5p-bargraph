@@ -1,0 +1,51 @@
+[
+  {
+    "name": "color",
+    "type": "text",
+    "label": "Bar color",
+    "description": "The default color for the bars in this chart.",
+    "optional": true,
+    "default": "064771",
+    "widget": "colorSelector",
+    "spectrum": {
+      "showInput": true
+    }
+  },
+  {
+    "name": "dataPoints",
+    "type": "list",
+    "label": "Data Points",
+    "entity": "Data Point",
+    "min": 1,
+    "field": {
+      "name": "dataPoint",
+      "type": "group",
+      "label": "Data Point",
+      "description": "An individual data point which represents one bar.",
+      "fields": [
+        {
+          "name": "value",
+          "type": "number",
+          "label": "Value",
+          "default": 1,
+          "min": 1
+        },
+        {
+          "name": "name",
+          "type": "text",
+          "label": "Name",
+          "description": "The name associated with this data point.",
+          "optional": true
+        },
+        {
+          "name": "barColor",
+          "type": "text",
+          "widget": "colorSelector",
+          "label": "Override Color",
+          "description": "The color to use for this bar instead of the chart default.",
+          "optional": true
+        }
+      ]
+    }
+  }
+]

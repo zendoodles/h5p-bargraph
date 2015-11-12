@@ -1,0 +1,14 @@
+{
+    "name": "zendoodles/bargraph",
+    "description": "Basic H5P Bar Graph implementation using d3js.",
+    "authors": [
+        {
+            "name": "Andrea Soper",
+            "email": "zendoodles@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "mbostock/d3": "dev-master"
+    }
+}

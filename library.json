@@ -1,0 +1,28 @@
+{
+  "title": "H5P Bar Graph",
+  "description": "Basic H5P Bar Graph implementation using d3js.",
+  "majorVersion": 1,
+  "minorVersion": 0,
+  "patchVersion": 0,
+  "runnable": 1,
+  "author": "Andrea Soper",
+  "machineName": "H5P.BarGraph",
+  "coreApi": {
+    "majorVersion": 1,
+    "minorVersion": 0
+  },
+  "preloadedJs": [
+    { "path": "vendor/mbostock/d3/d3.min.js" },
+    { "path": "js/bargraph.js" }
+  ],
+  "preloadedCss": [
+    { "path": "css/bargraph.css" }
+  ],
+  "editorDependencies": [
+    {
+      "machineName": "H5PEditor.ColorSelector",
+      "majorVersion": 1,
+      "minorVersion": 0
+    }
+  ]
+}
