@@ -5,7 +5,7 @@
     "label": "Bar color",
     "description": "The default color for the bars in this chart.",
     "optional": true,
-    "default": "064771",
+    "default": "E0196A",
     "widget": "colorSelector",
     "spectrum": {
       "showInput": true
@@ -41,6 +41,10 @@
           "name": "barColor",
           "type": "text",
           "widget": "colorSelector",
+          "default": "56C5D0",
+          "spectrum": {
+            "showInput": true
+          },
           "label": "Override Color",
           "description": "The color to use for this bar instead of the chart default.",
           "optional": true

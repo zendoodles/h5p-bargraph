@@ -28,16 +28,16 @@ H5P.BarGraph = (function ($) {
         var self = this;
         // Extend defaults with provided options
         this.options = $.extend(true, {}, {
-            color: "064771",
+            color: "56C5D0",
             dataPoints: []
         }, options);
         // Keep provided id.
         this.id = id;
     }
-
-        /**
-         * Calculate the width of bars based on the container size.
-         */
+    
+    /**
+     * Calculate the width of bars based on the container size.
+     */
     BarGraph.prototype.calculateBarWidth = function ($container) {
         // If we have a width, scale the bars to fit.
         var column = $container.width > 0
@@ -53,25 +53,27 @@ H5P.BarGraph = (function ($) {
      * @param {jQuery} $container
      */
     BarGraph.prototype.attach = function ($container) {
-        var dataPoints = self.options.dataPoints;
-        var defaultColor = self.options.color;
-
-        $container.addClass("bar-graph").html('');
-
-        var barWidth = 400;
+        var dataPoints = this.options.dataPoints;
+        var defaultColor = this.options.color;
+        var margin = {top: 40, right: 20, bottom: 30, left: 40};
+        var barWidth = 100;
         var width = (barWidth + 10) * dataPoints.length;
-        var height = 2000;
-
+        var height = 500;
+        var max = d3.max(dataPoints, function(datum) { return datum.value; });
         var x = d3.scale.linear().domain([0, dataPoints.length]).range([0, width]);
-        var y = d3.scale.linear().domain([0, d3.max(dataPoints, function(datum) { return datum.value; })]).
-            rangeRound([0, height]);
-
+        var y = d3.scale.linear().domain([0, max]).rangeRound([0, height]);
+        
+        $container.addClass("bar-graph").html('');
+        
         // Add the canvas to the DOM
         var chart = d3.select(".bar-graph").
             append("svg:svg").
-            attr("width", width).
-            attr("height", height);
-
+            attr("width", width + margin.left + margin.right).
+            attr("height", height + margin.top + margin.bottom).
+            append("g").
+            attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        
+        // Add the chart's bars.
         chart.selectAll("rect").
             data(dataPoints).
             enter().
@@ -80,20 +82,58 @@ H5P.BarGraph = (function ($) {
             attr("y", function(datum) { return height - y(datum.value); }).
             attr("height", function(datum) { return y(datum.value); }).
             attr("width", barWidth).
-            attr("fill", "#" + defaultColor);
-
+            attr("fill", function(datum) { return "#" + datum.barColor;});
+        
         // Add the numbers to the bars.
         chart.selectAll("text").
             data(dataPoints).
             enter().
             append("svg:text").
             attr("x", function(datum, index) { return x(index) + barWidth; }).
-            attr("y", function(datum) { return height - y(datum.name); }).
+            attr("y", function(datum) { return height - y(datum.value); }).
             attr("dx", -barWidth/2).
             attr("dy", "1.2em").
             attr("text-anchor", "middle").
-            text(function(datum) { return datum.name;}).
+            text(function(datum) { return datum.value;}).
             attr("fill", "white");
+       
+       // Add ticks.
+       chart.selectAll("yTicks").
+          data(y.ticks(10)).
+          enter().append("svg:line").
+          attr("x1", -5).
+          // Round and add 0.5 to fix anti-aliasing effects (see above)
+          attr("y1", function(d) { return ((height / max) * -d) + height}).
+          attr("x2", 0).
+          attr("y2", function(d) { return ((height / max) * -d) + height}).
+          attr("stroke", "lightgray").
+          attr("class", "yTicks");
+        
+        // Add text to y axis.
+        chart.selectAll("text.yAxis").
+            data(y.ticks(10)).
+            enter().
+            append("svg:text").
+            text(function (d) {return d;}).
+            attr("x", -10).
+            attr("y", function(d) { return ((height / max) * -d) + height}).
+            attr("dy", 3).
+            attr("class", "yAxis").
+            attr("style", "font-size: 10; font-family: Helvetica, sans-serif").
+            attr("text-anchor", "end");
+        
+        // Add text to x axis.
+        chart.selectAll("text.xAxis").
+            data(dataPoints).
+            enter().append("svg:text").
+            attr("x", function(datum, index) { return x(index) + barWidth; }).
+            attr("y", height).
+            attr("dx", -barWidth/2).
+            attr("text-anchor", "middle").
+            attr("style", "font-size: 12; font-family: Helvetica, sans-serif").
+            text(function(datum) { return datum.name;}).
+            attr("transform", "translate(0, 18)").
+            attr("class", "yAxis");
     };
 
     return BarGraph;
